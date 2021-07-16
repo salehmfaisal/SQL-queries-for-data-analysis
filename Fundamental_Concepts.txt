@@ -1,0 +1,322 @@
+/* Creating new table*/
+CREATE TABLE test (
+    a INTEGER,
+    b TEXT
+);
+
+
+/* Updatimng values in the table*/
+
+INSERT INTO test VALUES (1, 'a');
+INSERT INTO test VALUES (2, 'b');
+INSERT INTO test VALUES (3, 'c');
+
+SELECT * 
+  FROM test;
+  
+
+/*Dropping table*/
+
+CREATE TABLE test (
+  a TEXT,
+  b TEXT
+);
+INSERT INTO test VALUES ('one', 'two');
+
+SELECT * 
+FROM test;
+
+
+DROP TABLE test;
+
+DROP TABLE IF EXISTS test;
+
+/* Adding new values in the table */
+CREATE TABLE test (a INTEGER, b TEXT, c TEXT);
+
+SELECT * FROM test;
+INSERT INTO test VALUES (1, 'faisal', 'saima');
+
+INSERT INTO test (b,c) VALUES ('eva', 'bushra');
+
+INSERT INTO test DEFAULT VALUES;
+
+INSERT INTO test (a,b,c) SELECT id, name, description from item;
+
+
+/* Delete row from test table*/
+SELECT * FROM test;
+
+DELETE FROM test WHERE a=3;
+
+/* best practice of deleting rows */
+
+SELECT * FROM test WHERE a=1;
+
+/*Chnage SELECT * to DELETE*/
+
+
+DELETE FROM test WHERE a=1;
+DELETE FROM test WHERE b= 'eva';
+
+
+/* NUlL value treatment*/
+
+
+SELECT * FROM test WHERE a IS NULL;
+
+SELECT * FROM test WHERE a IS NOT NULL;
+
+DELETE FROM test WHERE a IS NULL;
+
+SELECT * FROM test;
+
+INSERT INTO test (a,b,c) VALUES (0, NULL, '');
+
+SELECT * FROM test WHERE c='';
+
+SELECT * FROM test WHERE b IS NULL;
+
+SELECT * FROM test WHERE c IS NOT NULL;
+/*Let's drop the test table and build a new one*/
+DROP TABLE test;
+
+CREATE TABLE test (
+ a INTEGER NOT NULL,
+ b TEXT NOT NULL,
+ c TEXT
+);
+
+INSERT INTO test (a,b,c) 
+    VALUES (1,'This', 'That');
+
+SELECT *
+  FROM test;
+  
+INSERT INTO test (b,c) 
+    VALUES ('Those', 'These'); /* Is not updating the table since 'a' can't take NULL value*/
+
+INSERT INTO test (a,b) 
+    VALUES (2, 'These');    
+  
+DELETE FROM test WHERE a='Those';
+
+
+
+/* Constraining the Columns*/
+DROP TABLE IF EXISTS test;
+CREATE TABLE test (
+ a TEXT,
+ b TEXT,
+ c TEXT NOT NULL
+);
+
+INSERT INTO test (a,b) VALUES('one', 'two');
+
+SELECT * FROM test; /* Table is not creating because c can't take NULL*/
+
+/* LEt's use DFEFAULT value for c*/
+DROP TABLE IF EXISTS test;
+CREATE TABLE test (
+ a TEXT UNIQUE,
+ b TEXT,
+ c TEXT DEFAULT 'Faisal'
+);
+
+INSERT INTO test (a,b) VALUES('one', 'two');
+INSERT INTO test (a,b) VALUES('ek', 'two');
+SELECT * FROM test;
+
+/* Let's try for NULL unique value*/
+DROP TABLE IF EXISTS test;
+CREATE TABLE test (
+ a TEXT UNIQUE,
+ b TEXT,
+ c TEXT DEFAULT 'Faisal'
+);
+
+INSERT INTO test (a,b) VALUES(NULL, 'two');
+INSERT INTO test (a,b) VALUES(NULL, 'two');
+SELECT * FROM test; 
+/* NULL is exampt from UNIQUE constraint*/
+
+
+/* Changing Table Schema*/
+
+DROP TABLE IF EXISTS test;
+CREATE TABLE test (
+ a TEXT,
+ b TEXT,
+ c TEXT
+);
+
+INSERT INTO test VALUES('one', 'two', 'three');
+INSERT INTO test  VALUES('four', 'five', 'six');
+INSERT INTO test  VALUES('seven', 'eight', 'nine');
+
+SELECT * FROM test; 
+
+/* Adding new column*/
+ALTER TABLE test ADD d TEXT;
+
+ALTER TABLE test ADD e TEXT DEFAULT 'faisal';
+
+
+/* Use of Primary Key*/
+
+DROP TABLE IF EXISTS test;
+CREATE TABLE test (
+ id INTEGER PRIMARY KEY,
+ b INTEGER,
+ c TEXT
+);
+
+INSERT INTO test  (b,c) VALUES('two', 'three');
+INSERT INTO test (b,c)  VALUES('five', 'six');
+INSERT INTO test (b,c) VALUES('eight', 'nine');
+
+SELECT * FROM test; 
+
+
+/* Filtering data Working with world data base */
+SELECT Name,
+       Continent,
+       Population
+  FROM country
+ WHERE Population < 100000 OR 
+       Population IS NULL-- One of the conditions needs to be true
+ ORDER BY Population DESC;
+
+
+/* Use of AND*/
+SELECT Name,
+       Continent,
+       Population
+  FROM country
+ WHERE Population < 100000 AND 
+       Continent = 'Oceania'-- Both condition need to be true
+ ORDER BY Population DESC;
+
+
+/* Use of LIKE clause */
+
+SELECT Name,
+       Continent,
+       Population
+  FROM country
+ WHERE Name LIKE '%island%'-- anywhere in the name
+ ORDER BY Name;
+
+/*-----------------------------*/
+SELECT Name,
+       Continent,
+       Population
+  FROM country
+ WHERE Name LIKE 'island%'-- starting with island in the name
+ ORDER BY Name;
+
+
+/*---------------*/
+SELECT Name,
+       Continent,
+       Population
+  FROM country
+ WHERE Name LIKE '%island'-- ends with island in the name
+ ORDER BY Name;
+
+
+/*------------------------*/
+SELECT Name,
+       Continent,
+       Population
+  FROM country
+ WHERE Name LIKE '_a%'/* countries name start with any alphabet but         
+                second alphabet is a and rest could be anything */
+ ORDER BY Name;
+
+/* Use of IN Clause*/
+SELECT Name,
+       Continent,
+       Population
+  FROM country
+ WHERE Continent IN ('Europe', 'Asia') /* All the countries in Asia and Europe */
+ ORDER BY Name;
+
+
+/* removing duplicates */
+SELECT DISTINCT Continent
+  FROM country;
+/*-----------------------*/
+DROP TABLE IF EXISTS test;
+CREATE TABLE test ( a INTEGER, b INTEGER );
+INSERT INTO test VALUES ( 1, 1 );
+INSERT INTO test VALUES ( 2, 1 );
+INSERT INTO test VALUES ( 3, 1 );
+INSERT INTO test VALUES ( 4, 1 );
+INSERT INTO test VALUES ( 5, 1 );
+INSERT INTO test VALUES ( 1, 2 );
+INSERT INTO test VALUES ( 1, 2 );
+INSERT INTO test VALUES ( 1, 2 );
+INSERT INTO test VALUES ( 1, 2 );
+INSERT INTO test VALUES ( 1, 2 );
+SELECT * FROM test;
+
+SELECT DISTINCT a FROM test;
+
+SELECT DISTINCT b FROM test;
+
+SELECT DISTINCT a,b FROM test;
+
+/* Ordering Output */
+
+SELECT Name
+  FROM Country;
+
+SELECT Name
+  FROM Country
+ ORDER BY Name;
+
+SELECT Name
+  FROM Country
+ ORDER BY Name DESC;
+
+SELECT Name
+  FROM Country
+ ORDER BY Name ASC;
+
+SELECT Name,
+       Continent
+  FROM Country
+ ORDER BY Continent,
+          Name;
+
+SELECT Name,
+       Continent,
+       Region
+  FROM Country
+ ORDER BY Continent DESC,
+          Region,
+          Name;
+/* Conditional Statements */
+DROP TABLE IF EXISTS booltest;
+
+CREATE TABLE booltest (
+    a INTEGER,
+    b INTEGER
+);
+
+INSERT INTO booltest VALUES (1, 0);
+
+SELECT *
+  FROM booltest;
+
+
+SELECT CASE WHEN a THEN 'true' ELSE 'false' END AS boolA,
+       CASE WHEN b THEN 'true' ELSE 'false' END AS boolB
+  FROM booltest;
+
+SELECT CASE a WHEN 1 THEN 'true' ELSE 'false' END AS boolA,
+       CASE b WHEN 1 THEN 'true' ELSE 'false' END AS boolB
+  FROM booltest;
+
+DROP TABLE IF EXISTS booltest;

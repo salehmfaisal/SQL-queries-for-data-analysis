@@ -1,0 +1,35 @@
+/* USe of LENGTH clasue*/
+SELECT Name,
+       LENGTH(Name) AS Len
+  FROM City
+ ORDER BY Len DESC,
+          Name;
+
+/*SUBSTR clasue selecting part of the string*/
+
+SELECT SUBSTR('this string', 6,4);
+
+/* Use of substr to split ip string*/
+
+SELECT released,
+  SUBSTR(released, 1,4) AS Year,
+  SUBSTR(released, 6,2) AS Month,
+  SUBSTR(released, 9,2) AS Day
+  FROM album
+ ORDER BY released;
+
+
+/* Removing spaces */
+SELECT TRIM('     string    ');
+SELECT LTRIM('     string    ');
+SELECT RTRIM('     string    ');
+SELECT TRIM('.......string......','.');
+
+/* Folding Cases */
+
+SELECT 'StrINg'= 'string';
+SELECT LOWER('StrINg')= LOWER('string');
+SELECT UPPER('StrINg')= UPPER('string');
+
+SELECT UPPER(Name) FROM City ORDER BY Name;
+SELECT LOWER(Name) FROM City ORDER BY Name;

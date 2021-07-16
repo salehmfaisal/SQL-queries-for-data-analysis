@@ -1,0 +1,129 @@
+/* Use of SELECT Statement*/
+SELECT Name AS "Country", 
+   LifeExpectancy AS "Life Expectancy", Region
+
+FROM Country;
+
+/* Use of ORDER BY CLause*/
+
+SELECT Name AS "Country", 
+   LifeExpectancy AS "Life Expectancy", Region
+
+FROM Country
+ORDER BY Country;
+
+/*Use of WHERE clause*/
+SELECT Name AS "Country", 
+   LifeExpectancy AS "Life Expectancy", Region
+
+FROM Country
+WHERE Region ="Southern Europe"
+ORDER BY Country;
+
+/* Use of AND Clause*/
+SELECT Name AS "Country", 
+   LifeExpectancy AS "Life Expectancy", Region, Population
+
+FROM Country
+WHERE Region ="Southern Europe" AND Population > 50000
+ORDER BY Country;
+
+/* Selecting Rows and Use of LIMIT and OFFSET Clauses*/
+SELECT Name AS "Country", 
+   Continent, Region
+
+FROM Country
+WHERE Continent= "Europe"
+ORDER BY Country LIMIT 5;
+
+/* For next 5 rows we need to use OFFSET clause*/
+SELECT Name AS "Country", 
+   Continent, Region
+
+FROM Country
+WHERE Continent= "Europe"
+ORDER BY Country LIMIT 5 OFFSET 5;
+
+
+
+/* Selecting columns*/
+SELECT Name AS "Country", 
+   Continent, Region
+
+FROM Country
+
+/* We can shuffle the order of columns by selecting them in diffrent order*/
+SELECT Name,
+       Region,
+       Continent
+FROM Country;
+
+/*Counting Rows*/
+SELECT COUNT(*)
+
+FROM Country;
+
+/* With WHERE Clause*/
+SELECT COUNT(*)
+
+FROM Country
+
+WHERE Population > 1000000;
+
+/*Count specific column*/
+SELECT COUNT(Region)
+
+FROM Country;
+
+/* USe of DISTINCT Clause for unique members*/
+SELECT COUNT(DISTINCT Region)
+
+FROM Country;
+
+/* Adding new row (data) into the table*/
+SELECT * 
+FROM customer;
+
+INSERT INTO customer(name, address, city, state, zip)
+VALUES ('Faisal', '1101 Socorro', 'Socorro', 'NM', '87801' );
+
+INSERT INTO customer(name, city, state)
+VALUES ('Saima', 'Socorro', 'NM' );
+
+
+/*Changing data in the table by using UPDATE and SET Clause*/
+SELECT * 
+FROM customer;
+
+UPDATE customer SET Name= 'Saleh', city= 'Bernallio', zip= '86501'
+      WHERE id=5;
+
+/* We can set NULL value for a field also by assigning NULL into the field*/
+UPDATE customer SET city= NULL, zip= '86501'
+      WHERE id=5;
+      
+
+/* Delete data or row from table by using DELETE Clause*/
+SELECT * 
+FROM customer
+WHERE id=4;
+
+DELETE FROM customer 
+WHERE id=4;
+
+SELECT * 
+FROM customer;
+
+
+DELETE FROM customer 
+WHERE id=5;
+
+SELECT * 
+FROM customer;
+
+DELETE FROM customer 
+WHERE id=6;
+
+SELECT * 
+FROM customer;
+
